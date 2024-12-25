@@ -90,27 +90,4 @@ if st.button("Aplicar resultado"):
         # Exibir saldo atualizado
         st.write(f"Saldo atualizado de {jogador_selecionado}: {st.session_state.jogadores[jogador_selecionado]} moedas")
 
-# Gerar o PDF
-if st.button("Gerar PDF"):
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
 
-    pdf.cell(200, 10, txt="Relatório de Lances - Jogo de Dreidel", ln=True, align="C")
-    pdf.ln(10)
-
-    for i, lance in enumerate(st.session_state.lances, 1):
-        pdf.cell(0, 10, txt=f"{i}. {lance}", ln=True)
-
-    # Salvar o PDF em memória
-    pdf_buffer = BytesIO()
-    pdf.output(pdf_buffer)
-    pdf_buffer.seek(0)
-
-    # Botão para baixar o PDF
-    st.download_button(
-        label="Baixar PDF",
-        data=pdf_buffer,
-        file_name="relatorio_dreidel.pdf",
-        mime="application/pdf"
-    )
